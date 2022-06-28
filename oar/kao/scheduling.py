@@ -121,7 +121,7 @@ def get_encompassing_slots(slots, t_begin, t_end):
 
 
 def find_first_suitable_contiguous_slots(slots_set, job, res_rqt, hy, min_start_time):
-    """find first_suitable_contiguous_slot """
+    """find first_suitable_contiguous_slot"""
 
     (mld_id, walltime, hy_res_rqts) = res_rqt
 
@@ -289,11 +289,15 @@ def find_first_suitable_contiguous_slots(slots_set, job, res_rqt, hy, min_start_
 
 def assign_resources_mld_job_split_slots(slots_set, job, hy, min_start_time):
     """Assign resources to a job and update by spliting the concerned slots - moldable version"""
-    prev_t_finish = 2 ** 32 - 1  # large enough
+<<<<<<< HEAD
+    prev_t_finish = 2**32 - 1  # large enough
     #prev_t_finish = 0
     #prev_nodes = 3
     #prev_walltime = 43200
     #prev_product = prev_nodes*prev_walltime
+=======
+    prev_t_finish = 2**32 - 1  # large enough
+>>>>>>> upstream/master
     prev_res_set = ProcSet()
     prev_res_rqt = ProcSet()
 
