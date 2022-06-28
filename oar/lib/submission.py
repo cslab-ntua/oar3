@@ -515,7 +515,7 @@ def estimate_job_nb_resources(resource_request, j_properties):
                     jrg_grp_property = ""
 
                 sql_constraints = j_properties + and_sql + jrg_grp_property
-
+                logger.info(str(sql_constraints))
                 try:
                     request_constraints = (
                         db.query(Resource.id).filter(text(sql_constraints)).all()
@@ -531,9 +531,10 @@ def estimate_job_nb_resources(resource_request, j_properties):
                     )
                     error = (error_code, error_msg)
                     return (error, None, None)
-
+                logger.info(str(request_constraints))
                 roids = [resource_set.rid_i2o[int(y[0])] for y in request_constraints]
                 constraints = ProcSet(*roids)
+                logger.info(str(constraints))
 
             hy_levels = []
             hy_nbs = []
@@ -542,8 +543,12 @@ def estimate_job_nb_resources(resource_request, j_properties):
                 value = resource_value["value"]
                 hy_levels.append(resource_set.hierarchy[res_name])
                 hy_nbs.append(int(value))
-
+            
+            logger.info(str(resources_itvs))
             cts_resources_itvs = constraints & resources_itvs
+            logger.info(str(cts_resources_itvs))
+            logger.info(str(hy_levels))
+            logger.info(str(hy_nbs))
             res_itvs = find_resource_hierarchies_scattered(
                 cts_resources_itvs, hy_levels, hy_nbs
             )

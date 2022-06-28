@@ -111,8 +111,6 @@ class ResourceSet(object):
             hy_roid["resource_id"] = hy_roid["id"]
             del hy_roid["id"]
         
-        del hy_roid["firsthalf"][0] 
-        del hy_roid["secondhalf"][0]
         logger.info(str(hy_roid))
         # create hierarchy
         self.hierarchy = Hierarchy(hy_rid=hy_roid).hy

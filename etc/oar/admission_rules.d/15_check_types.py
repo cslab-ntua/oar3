@@ -1,3 +1,4 @@
+# Added three new types: exclusive, spread and dont-care.
 if types:
     r1 = "^container(?:=\\w+)?$"
     r2 = "^deploy(?:=standby)?$"

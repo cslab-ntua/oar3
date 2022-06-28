@@ -369,6 +369,8 @@ def get_data_jobs(jobs, jids, resource_set, job_security_time, besteffort_durati
                     jrg_grp_property = ""
 
                 sql_constraints = j_properties + and_sql + jrg_grp_property
+                logger.info("Print properties")
+                logger.info(str(sql_constraints))
                 if sql_constraints in cache_constraints:
                     res_constraints = cache_constraints[sql_constraints]
                 else:
