@@ -1,5 +1,5 @@
 # Modify user request according to the given type:
-#   Exclusive: Select required number of cores (plus extra, to fully occupy the respective nodes).
+#   Exclusive: Select required number of nodes.
 #   Spread: Cores should satisfy halfcpu > 0.
 #   Dont-care: Cores should satisfy halfcpu < 0. If these are not enough, select without restrictions (two moldable instances).
 #
@@ -19,10 +19,9 @@ import math
 #   3:12
 # }
 # The following lines should also change:
-#   line 96: nodes, mod = divmod(cores, 2 * 12) --> nodes, mod = divmod(cores, cpu per nodes * cores per cpu)
-#   line 99 cores += (24 * nodes) % cores --> cores += ((cpu per node * cores per cpu) * nodes) % cores
-#   line 101: cores += cores % 6 --> cores += cores % (cores per cpu / 2) 
-#   line 103: cores += cores % 6 --> cores += cores % (cores per cpu / 2)
+#   line 96: nodes, mod = math.ceil(cores / (2 * 12)) --> nodes = math.ceil(cores / (cpu per nodes * cores per cpu))
+#   line 102: cores += cores % 6 --> cores += cores % (cores per cpu / 2) 
+#   line 116: cores += cores % 6 --> cores += cores % (cores per cpu / 2)
 
 # Similarly for the max_hy and min_hy. 
 # These numbers represent the bottom (i.e. core) and top (i.e. node) hierarchy levels respectively.
@@ -95,21 +94,26 @@ for rq in resource_request:
 
     res.clear()
     if 'exclusive' in types:
-        nodes, mod = divmod(cores, 2 * 4)
-        if mod:
-            nodes +=1
-        cores += (8 * nodes) % cores
-        res.append({'resource':'core', 'value':cores})
+        nodes = math.ceil(cores / (2 * 4))
+        res.append({'resource':'network_address', 'value':nodes})
         new_prop = ''
     elif 'spread' in types:
         cores += cores % 2
         res.append({'resource':'core', 'value':cores})
         new_prop = 'halfcpu > 0'
     else:
+        #nodes = math.ceil(cores / (2 * 4))
+        #new_rq = ([{'property': prop, 'resources': [{'resource': 'network_address', 'value': nodes}]}], wt)
+        #acc.append(new_rq)
+
+        #new_rq = ([{'property': prop, 'resources': [{'resource': 'halfcpu', 'value': half_cpus}]}], wt)
+        #acc.append(new_rq)
+
         new_rq = ([{'property': prop, 'resources': [{'resource': 'core', 'value': cores}]}], wt)
         acc.append(new_rq)
 
         cores += cores % 2
+
         res.append({'resource':'core', 'value':cores})
         new_prop = 'halfcpu < 0'
     

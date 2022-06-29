@@ -1,6 +1,5 @@
 # Find moldable instance with minimum (walltime*cores) product.
 # If two or more instances have the same product, keep them all. Internal scheduler will make the final choice (by minimum ending time).
-# Note: After applying rule 19_policies.py, all resource requests come in the form of -l core.
 
 # Author: Alexis Papavasileiou
 
