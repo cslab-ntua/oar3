@@ -1,5 +1,5 @@
 # Specify the default walltime if it is not specified
-default_walltime = sql_to_duration("2:00:00")
+default_walltime = tools.sql_to_duration("2:00:00")
 
 for i, mold in enumerate(resource_request):
     if not mold[1]:

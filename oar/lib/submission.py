@@ -24,6 +24,7 @@ from oar.lib import (
     Resource,
     config,
     db,
+    get_logger
 )
 from oar.lib.hierarchy import find_resource_hierarchies_scattered
 from oar.lib.resource import ResourceSet
@@ -36,6 +37,8 @@ from oar.lib.tools import (
     sql_to_local,
 )
 
+
+logger = get_logger("oar.lib.submission")
 
 def lstrip_none(s):
     if s:
@@ -1067,7 +1070,7 @@ def add_micheline_jobs(
         config["ADMISSION_RULES_IN_FILES"] == "yes"
     ):
         # Read admission_rules from files
-        rules_dir = "/etc/oar/admission_rules.d/"
+        rules_dir = "/srv/oar3_clone/etc/oar/admission_rules.d/"
         file_names = os.listdir(rules_dir)
 
         file_names.sort()
