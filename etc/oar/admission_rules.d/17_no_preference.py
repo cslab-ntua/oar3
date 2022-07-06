@@ -23,21 +23,9 @@ if 'no-preference' in types:
             cores *= hier[key]
         return cores
 
-    acc = []
-
     for mold in resource_request:
         (resource_desc_list, wt) = mold
         for resource_desc in resource_desc_list:
             cores = findcores(resource_desc['resources']) 
             cores += cores % 2
-            
-            new_mold = ([{'property': resource_desc['property'] , 'resources': [{'resource': 'core', 'value': cores}]}], wt)
-            acc.append(new_mold)
-            
-            prop = 'halfcpu < 0'
-            if resource_desc['property']:
-                prop += ' ' + 'and' + ' ' + resource_desc['property']
-            resource_desc['property'] = prop
             resource_desc['resources'] = [{'resource': 'core', 'value': cores}]
-
-    resource_request += acc

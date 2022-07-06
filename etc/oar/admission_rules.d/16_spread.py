@@ -35,7 +35,7 @@ if 'spread' in types:
                 prop += ' ' + 'and' + ' ' + resource_desc['property']
             resource_desc['property'] = prop
             resource_desc['resources'] = [{'resource': 'core', 'value': cores}]
-            #new_mold = ([{'property': prop.replace('>', '<') , 'resources': [{'resource': 'core', 'value': cores}]}], wt)
-            #acc.append(new_mold)
+            new_mold = ([{'property': prop.replace('>', '<') , 'resources': [{'resource': 'core', 'value': cores}]}], wt)
+            acc.append(new_mold)
 
     resource_request += acc
