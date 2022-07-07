@@ -1,5 +1,43 @@
-if 'spread' in types:
+# Modify user request according to the given type:
+#   Spread: Cores should satisfy only one of the following: halfcpu > 0 OR halfcpu < 0
 
+# Right now:
+#   cores per cpu = 4
+#   cpu per nodes = 2
+#   nodes = 8
+# If these change, the file should be modified accordingly (by hand). 
+# e.g. cores per cpu = 12, cpu per nodes = 2, nodes = 4. In that case:
+# default = {
+#   0:4,
+#   1:2.
+#   2:1,
+#   3:12
+# }
+# The following line should also change:
+#   line 64: cores += cores % 6 --> cores % (cores per cpu / 2)
+
+# Similarly for the max_hy and min_hy. 
+# These numbers represent the bottom (i.e. core) and top (i.e. node) hierarchy levels respectively.
+# e.g. A new hierarchy level is added:
+# swith --> node --> cpu -- > halfcpu --> core
+# In that case:
+#   min_hy = 0
+#   max_hy = 4
+#   hy = {
+#       'switch': 0,
+#       'network_address': 1,
+#       'cpu': 2,
+#       'halfcpu': 3,
+#       'core': 4
+#   }
+
+# Author: Alexis Papavasileiou
+
+if 'spread' in types:
+    # Find number of cores requested by user.
+    # Explicitly requested resource types are noted in the hier dictionary (resource log).
+    # Skipped resource types are added from the default dictionary.
+    # Eventual core number is calculated as the product of the values in the hier dictionary.
     def findcores(resource_types):
         hy = {'network_address':0, 'cpu':1, 'halfcpu':2, 'core':3}
         hier = {0:1, 1:1, 2:1, 3:1}
