@@ -1,5 +1,3 @@
-logger.info(str(locals()))
-logger.info(str(globals()))
 if types:
     r1 = "^container(?:=\\w+)?$"
     r2 = "^deploy(?:=standby)?$"
