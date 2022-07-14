@@ -4,7 +4,6 @@ if 'compact' in types:
 
     resource_set = ResourceSet()
     resources_itvs = resource_set.roid_itvs
-    logger.info(str(vars(resource_set)))
     
     for mold in resource_request:
         (resource_desc_list, _) = mold
