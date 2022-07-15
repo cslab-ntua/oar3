@@ -1067,7 +1067,7 @@ def add_micheline_jobs(
         config["ADMISSION_RULES_IN_FILES"] == "yes"
     ):
         # Read admission_rules from files
-        rules_dir = "/srv/oar3_clone/etc/oar/admission_rules.d/"
+        rules_dir = "/etc/oar/admission_rules.d/"
         file_names = os.listdir(rules_dir)
 
         file_names.sort()
