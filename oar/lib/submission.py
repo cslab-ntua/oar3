@@ -24,7 +24,6 @@ from oar.lib import (
     Resource,
     config,
     db,
-    get_logger
 )
 from oar.lib.hierarchy import find_resource_hierarchies_scattered
 from oar.lib.resource import ResourceSet
@@ -37,8 +36,6 @@ from oar.lib.tools import (
     sql_to_local,
 )
 
-
-logger = get_logger("oar.lib.submission")
 
 def lstrip_none(s):
     if s:
