@@ -9,8 +9,9 @@ if types:
     r8 = "^allowed=\\w+$"
     r9 = "^inner=\\w+$"
     r10 = "^timesharing=(?:(?:\\*|user),(?:\\*|name)|(?:\\*|name),(?:\\*|user))$"
+    r11 = "^(?:compact|spread|no-preference)$"
     all_re = re.compile(
-        "(%s|%s|%s|%s|%s|%s|%s|%s|%s|%s)" % (r1, r2, r3, r4, r5, r6, r7, r8, r9, r10)
+        "(%s|%s|%s|%s|%s|%s|%s|%s|%s|%s|%s)" % (r1, r2, r3, r4, r5, r6, r7, r8, r9, r10, r11)
     )
 
     for t in types:
