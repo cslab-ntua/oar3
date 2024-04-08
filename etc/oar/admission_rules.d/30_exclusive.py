@@ -13,7 +13,7 @@ if "exclusive" in types:
         for prop_res in resource_desc:
             for resource_value in prop_res["resources"]:
                 if resource_value["resource"] == "core":
-                    resource_value["resource"] = "nodes"
+                    resource_value["resource"] = "network_address"
                     resource_value["value"] = str(
                         math.ceil(float(resource_value["value"]) / cores_per_node)
                     )
