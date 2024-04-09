@@ -71,6 +71,8 @@ jobs:
           with:
             path: artifacts
         - uses: codecov/codecov-action@v1
+          env:
+            CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
           with:
             files: ./artifacts/coverage-report/coverage.xml
             fail_ci_if_error: true # optional (default = false)
